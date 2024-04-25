@@ -1,36 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import Message from "./Messsage";
 
-function App() {
-  // tuple
-  let aTuple: [string, number] = ['Juan', 34];
-  // enum
-  enum Codes {first = 1, second = 2}
-  // any
-  let firstName: any = 3;
-  // void
-  const warning = (): void => {
-    console.log('Warning');
-  }
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          The value {warning.toString()} is of {typeof warning} type!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App: React.FC = () => {
+
+    const [userName, setUserName] = useState<string>('User');
+    const [userMessage, setUserMessage] = useState<string>('This is the initial message');
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            // update the state after 5 seconds
+            setUserName('Juan');
+            setUserMessage('Updated message with Typescript');
+        }, 5000)
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <div className="App">
+            <h1>Typescript is cool</h1>
+            <Message name={userName} message={userMessage}/>
+        </div>
+    );
 }
 
 export default App;
