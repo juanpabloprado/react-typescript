@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import Message from "./Messsage";
+import {UserContext} from "./UserContext";
 
 const App: React.FC = () => {
 
@@ -17,10 +18,10 @@ const App: React.FC = () => {
     }, []);
 
     return (
-        <div className="App">
+        <UserContext.Provider value={{name: userName, message: userMessage}}>
             <h1>Typescript is cool</h1>
-            <Message name={userName} message={userMessage}/>
-        </div>
+            <Message/>
+        </UserContext.Provider>
     );
 }
 
